@@ -55,7 +55,7 @@ function Header() {
                 aria-expanded="false"
               >
                 <i className="fas fa-bell"></i>
-                <span className="badge rounded-pill badge-notification bg-danger">1</span>
+                {/* <span className="badge rounded-pill badge-notification bg-danger">1</span> */}
               </a>
               <ul
                 className="dropdown-menu dropdown-menu-end"

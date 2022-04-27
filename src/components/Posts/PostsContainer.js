@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './Post'
+import PostList from './PostList'
 import SubmissionForm from './SubmissionForm';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
@@ -42,7 +42,7 @@ class PostsContainer extends React.Component {
       visibleText = <SubmissionForm handleAddingNewPostToList={this.handleAddingNewPostToList} handleFormToggle={this.handleFormToggle}/>
     } else {
       visibleText = <div>
-                      <Post />
+                      <PostList mainPostList={this.props.mainPostList}/>
                       <div className="text-center mt-3">
                         <button className="btn btn-primary" type="button" onClick={this.handleFormToggle}>Make new post</button>
                       </div>

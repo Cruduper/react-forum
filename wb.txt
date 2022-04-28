@@ -1,0 +1,91 @@
+You are given an integer array nums. Two players are playing a game with this array: player 1 and player 2.
+
+Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1]) which reduces the size of the array by 1. The player adds the chosen number to their score. The game ends when there are no more elements in the array.
+
+Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.
+
+
+Example 1:
+
+Input: nums = [1,5,2]       player1 = 1, player2 = 2
+Output: false
+Explanation: Initially, player 1 can choose between 1 and 2. 
+If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. If player 2 chooses 5, then player 1 will be left with 1 (or 2). 
+So, final score of player 1 is 1 + 2 = 3, and player 2 is 5. 
+Hence, player 1 will never be the winner and you need to return false.
+
+Input: nums = [1,5,233,7]   [5,x,x,x,x,233]  [5,233,7]
+Output: true
+Explanation: Player 1 first chooses 1. Then player 2 has to choose between 5 and 7. No matter which number player 2 choose, player 1 can choose 233.
+Finally, player 1 has more score (234) than player 2 (12), so you need to return True representing player1 can win.
+
+[1,5,2] 
+player1Score & player2Score = 0;
+
+origArray = [1,5,233,7]
+
+newTempArr = [5,233] === origArr.slice(0) & slice(length-1)
+if newTempArr[0] < newTempArr[length - 1]
+
+if true {
+  player1 picks 1, score increases by origArry[0]
+}
+
+origArray now is [5,233,7]           [1,5,56,799,22,33,7]
+                                       [5,55,799,14432,233,7]
+                                        [5,55,799,14432,233]
+                                         [5,55,799,14432]
+                                          [5,55,799,14432]
+tempArr = [233]
+
+if one digit, player2 picks larger of origArra[0] or origArray[length-1]
+
+plaery2 += 7
+
+player1 picks larger of remaining numbers [233]
+
+player2 picks 5
+
+
+if player1 > player2 {return player1} else return player2
+
+var PredictTheWinner = function(nums) {
+    let oneScore = 0;
+    let twoScore = 0;
+    
+    for (let x = 0; x < nums.length; x++) {
+      let tempArray = nums.slice(1, (nums.length -1));
+      if (x % 2 === 0) {
+        if (tempArray[0] > tempArray[tempArray.length-1]) {
+          oneScore += nums[x];
+        }
+      } else {
+        if (tempArray[0] > tempArray[tempArray.length-1]) {
+          twoScore += nums[x];
+        }
+      }
+      nums = nums.slice(1, (nums.length -1));
+      console.log(nums)
+    }
+    
+    if (oneScore >= twoScore) {
+      return true;
+    } else {
+      return false;
+    }
+};
+
+
+
+var PredictTheWinner = function(nums,turn = 1, score1 = 0,score2 = 0) {
+    
+    let len = nums.length;
+    if(len === 0 ) return score1>= score2;
+    
+    if(turn%2===0){
+        return PredictTheWinner(nums.slice(1,),turn+1,score1,score2+nums[0]) && PredictTheWinner(nums.slice(0,-1),turn+1,score1,score2+nums[len-1])
+    }
+    
+    return PredictTheWinner(nums.slice(1,),turn+1,score1+nums[0],score2) || PredictTheWinner(nums.slice(0,-1),turn+1,score1+nums[len-1],score2)
+
+};

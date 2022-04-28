@@ -15,7 +15,12 @@ export default function Post (props) {
         <PostText postText={props.postText}/>
       </div>
       <div className="col-md-3 col-sm-6 col-xs-12 border p-3">
-        <Voting score={props.score}/>
+        <Voting 
+          score={props.score}
+          id={props.id}
+          handleUpvotePost={props.handleUpvotePost}
+          handleDownvotePost={props.handleDownvotePost}
+        />
       </div>
     </div>
   )

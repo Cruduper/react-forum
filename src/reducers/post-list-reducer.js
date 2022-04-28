@@ -11,9 +11,26 @@ export default (state = {}, action) => {
           id: id
         }
       });
-    
-    
+    case 'VOTE':
+      const newPost = Object.assign({}, state[id], {score});
+      const updatedState = Object.assign({}, state, {
+        [id]: newPost
+      });
+      return updatedState;
     default: 
       return state;
   }
 };
+
+
+
+
+// case c.UPDATE_TIME:
+//     const newTicket = Object.assign({}, state[id], {formattedWaitTime});
+//     const updatedState = Object.assign({}, state, {
+//       [id]: newTicket
+//     });
+//     return updatedState;
+//   default:
+//     return state;
+//   }
